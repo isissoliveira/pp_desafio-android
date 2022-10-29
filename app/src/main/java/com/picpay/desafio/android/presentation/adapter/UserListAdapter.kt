@@ -1,14 +1,16 @@
-package com.picpay.desafio.android
+package com.picpay.desafio.android.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.picpay.desafio.android.data.model.UserResponse
+import com.picpay.desafio.android.R
+import com.picpay.desafio.android.presentation.viewHolder.UserListItemViewHolder
+import com.picpay.desafio.android.presentation.model.UserVO
 
 class UserListAdapter : RecyclerView.Adapter<UserListItemViewHolder>() {
 
-    var users = emptyList<UserResponse>()
+    var users = emptyList<UserVO>()
         set(value) {
             val result = DiffUtil.calculateDiff(
                 UserListDiffCallback(

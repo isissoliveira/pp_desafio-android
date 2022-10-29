@@ -1,13 +1,11 @@
-package com.picpay.desafio.android.data.model
+package com.picpay.desafio.android.domain.model
 
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import com.picpay.desafio.android.utils.extensions.getInitials
 
-@Parcelize
-data class UserResponse(
-    @SerializedName("img") val img: String?,
-    @SerializedName("name") val name: String,
-    @SerializedName("id") val id: Int,
-    @SerializedName("username") val username: String
-) : Parcelable
+data class User(
+    val img: String? = "",
+    val name: String,
+    val id: Int,
+    val username: String,
+    val initials: String = name.getInitials()
+)
