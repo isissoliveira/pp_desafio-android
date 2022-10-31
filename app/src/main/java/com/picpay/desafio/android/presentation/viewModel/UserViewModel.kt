@@ -13,15 +13,11 @@ import kotlinx.coroutines.launch
 class UserViewModel(
     private val userUseCase: UserUseCase
 ) : ViewModel() {
-    private val _usersListState = MutableLiveData<Result<List<UserVO>?>>()
-    val usersListState: LiveData<Result<List<UserVO>?>>
+    private val _usersListState = MutableLiveData<Result<List<UserVO>>>()
+    val usersListState: LiveData<Result<List<UserVO>>>
         get() = _usersListState
 
-    init {
-        getUsers()
-    }
-
-    private fun getUsers() {
+    fun getUsers() {
         viewModelScope.launch(Dispatchers.IO) {
             val listUsers = userUseCase()
             _usersListState.postValue(listUsers)

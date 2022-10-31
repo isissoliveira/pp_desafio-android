@@ -7,13 +7,13 @@ import com.picpay.desafio.android.domain.model.User
 import timber.log.Timber
 
 class UserRepository(private val userApi: UserApi) {
-    suspend fun getUsers(): List<User>? {
+    suspend fun getUsers(): List<User> {
         return try {
-            val usersResponse: List<UserResponse>? = userApi.getUsers()
-            usersResponse?.toDomain()
+            val usersResponse: List<UserResponse> = userApi.getUsers()
+            usersResponse.toDomain()
         } catch (e: Exception) {
             Timber.e("Couldn't get the users : ${e.message}")
-            null
+            throw e
         }
     }
 }

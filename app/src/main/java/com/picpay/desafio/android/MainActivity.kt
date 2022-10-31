@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        userViewModel.getUsers()
         setupView()
         setupObserver()
     }
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun setupObserver() {
-        val userObserver = Observer<Result<List<UserVO>?>> { result ->
+/*        val userObserver = Observer<Result<List<UserVO>?>> { result ->
             result
                 .onSuccess { listUsers ->
                     listUsers?.let { users ->
@@ -61,8 +62,30 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                         .show()
                 }
             progressBar.visibility = View.GONE
-        }
-        userViewModel.usersListState.observe(this, userObserver)
+        }*/
+        userViewModel.usersListState
+            .observe(this) { result ->
+                result
+                    .onSuccess { listUsers ->
+                        if (listUsers.isEmpty()){
+                            recyclerView.visibility = View.GONE
+                            val message = getString(R.string.empty)
+                            Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            adapter.users = listUsers
+                            recyclerView.visibility = View.VISIBLE
+                        }
+                    }
+                    .onFailure {
+                        recyclerView.visibility = View.GONE
+                        val message = getString(R.string.error)
+                        Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                progressBar.visibility = View.GONE
+
+            }
     }
 
 /*    override fun onResume() {
