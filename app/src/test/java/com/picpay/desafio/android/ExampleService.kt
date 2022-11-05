@@ -7,9 +7,9 @@ class ExampleService(
     private val service: UserApi
 ) {
 
-    fun example(): List<UserResponse> {
+    /*fun example(): List<UserResponse> {
         val users = service.getUsers().execute()
 
         return users.body() ?: emptyList()
-    }
+    }*/
 }

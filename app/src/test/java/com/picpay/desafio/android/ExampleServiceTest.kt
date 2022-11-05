@@ -15,7 +15,7 @@ class ExampleServiceTest {
 
     private val service = ExampleService(api)
 
-    @Test
+    /*@Test
     fun exampleTest() {
         // given
         val call = mock<Call<List<UserResponse>>>()
@@ -29,5 +29,5 @@ class ExampleServiceTest {
 
         // then
         assertEquals(users, expectedUsers)
-    }
+    }*/
 }
