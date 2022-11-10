@@ -12,11 +12,17 @@ import kotlinx.coroutines.launch
 class UserViewModel(
     private val userUseCase: UserUseCase
 ) : ViewModel() {
+    private var isLoading = false
     private val _usersListState = MutableLiveData<UserState>()
     val usersListState: LiveData<UserState>
         get() = _usersListState
 
     fun getUsers() {
+        if (isLoading) return
+
+        _usersListState.postValue(UserState.Loading)
+        isLoading = true
+
         viewModelScope.launch(Dispatchers.IO) {
             userUseCase()
                 .onSuccess { data ->
@@ -30,6 +36,7 @@ class UserViewModel(
                 .onFailure {
                     _usersListState.postValue(UserState.Failure)
                 }
+            isLoading = false
         }
     }
 

@@ -50,22 +50,27 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     is UserState.Success -> {
                         adapter.users = state.listUsersVO
                         recyclerView.visibility = View.VISIBLE
+                        progressBar.visibility = View.GONE
                         noRecordsTextView.visibility = View.GONE
                     }
                     is UserState.Empty -> {
                         recyclerView.visibility = View.GONE
+                        progressBar.visibility = View.GONE
                         noRecordsTextView.visibility = View.VISIBLE
                     }
                     is UserState.Failure -> {
                         recyclerView.visibility = View.GONE
+                        progressBar.visibility = View.GONE
                         noRecordsTextView.visibility = View.VISIBLE
                         val message = getString(R.string.error)
                         Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT)
                             .show()
                     }
-                    else -> {}
+                    else -> {
+                        progressBar.visibility = View.VISIBLE
+                    }
                 }
-                progressBar.visibility = View.GONE
+
             }
     }
 }

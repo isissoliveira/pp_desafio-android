@@ -30,6 +30,8 @@
             style="@style/ScreenSubTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
             android:text="@string/empty"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/title"
