@@ -9,7 +9,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_user.view.*
 
 class UserListItemViewHolder(
-    itemView: View
+    itemView: View,
+    var onClick: (UserVO) -> Unit = { }
 ) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(user: UserVO) {
@@ -28,5 +29,10 @@ class UserListItemViewHolder(
                     itemView.progressBar.visibility = View.GONE
                 }
             })
+
+        itemView.setOnClickListener {
+            onClick(user)
+        }
     }
+
 }
